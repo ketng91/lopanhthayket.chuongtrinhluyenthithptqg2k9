@@ -149,7 +149,7 @@ Luyện thi THPTQG - Lớp Anh thầy Kết
 
 <div id="lesson-list"></div>
 
-<a href="https://ketng91.github.io/lopanhthayket_thptqg2k9/" class="back-btn">
+<a href="https://ketng91.github.io/lopanhthayket_thptqg26/" class="back-btn">
 ⬅ Quay về trang chính
 </a>
 
@@ -478,8 +478,20 @@ const lessons = [
 
 const container = document.getElementById("lesson-list");
 
-lessons.forEach(item => {
+// Xếp bài học theo ngày: mới nhất → cũ nhất
+lessons.sort((a, b) => {
+    const getDate = (time) => {
+        const match = time.match(/(\d{2})\/(\d{2})/);
+        if (!match) return new Date(0);
 
+        const [, day, month] = match;
+        return new Date(2026, Number(month) - 1, Number(day));
+    };
+
+    return getDate(b.time) - getDate(a.time);
+});
+
+lessons.forEach(item => {
 container.innerHTML += `
 <div class="toc-item lesson">
 
